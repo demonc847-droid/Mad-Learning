@@ -84,7 +84,10 @@ class AIArchitectBot:
             self.console.print("   ✓ OpenRouter API connection successful")
         else:
             self.console.print("   ✗ OpenRouter API connection failed")
-            self.console.print("   [yellow]Please check your API key and internet connection[/yellow]")
+            self.console.print("   [yellow]Please check:[/yellow]")
+            self.console.print("   [yellow]  • Your internet connection is working[/yellow]")
+            self.console.print("   [yellow]  • Your OpenRouter API key is valid[/yellow]")
+            self.console.print("   [yellow]  • Try again in a moment (server may be busy)[/yellow]")
             return False
         
         # Configuration Load

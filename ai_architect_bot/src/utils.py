@@ -69,11 +69,20 @@ def check_connection() -> bool:
         response = requests.get(
             f"{config.base_url}/models",
             headers=config.headers,
-            timeout=15  # 15-second timeout for Karachi internet latency
+            timeout=30  # Increased timeout to 30 seconds for better reliability
         )
         return response.status_code == 200
-    except Exception as e:
+    except requests.exceptions.Timeout:
+        print("Connection check failed: Request timed out (30s)")
+        return False
+    except requests.exceptions.ConnectionError:
+        print("Connection check failed: Network connection error")
+        return False
+    except requests.exceptions.RequestException as e:
         print(f"Connection check failed: {e}")
+        return False
+    except Exception as e:
+        print(f"Connection check failed: Unexpected error - {e}")
         return False
 
 
